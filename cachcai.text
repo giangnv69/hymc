@@ -1,0 +1,2 @@
+Nhớ sửa lại Tên miền Url trong public/backend/plugins/ckfinder/config.php
+'baseUrl'  => 'http://domain.com/uploads',

@@ -1,0 +1,434 @@
+@media (max-width: 767px) {
+    .row {
+        margin: 0 -5px;
+    }
+    .row .col-md-1,.row .col-md-2,.row .col-md-3,.row .col-md-4,.row .col-md-5,.row .col-md-6,.row .col-md-7,.row .col-md-8,.row .col-md-9,.row .col-md-10,.row .col-md-11,.row .col-md-12 {
+        padding: 0 5px;
+    }
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+    .row {
+        margin: 0 -5px;
+    }
+    .row .col-md-1,.row .col-md-2,.row .col-md-3,.row .col-md-4,.row .col-md-5,.row .col-md-6,.row .col-md-7,.row .col-md-8,.row .col-md-9,.row .col-md-10,.row .col-md-11,.row .col-md-12 {
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-menu {
+        display: none;
+    }
+    .header-top .header {
+        display: block !important;
+    }
+
+    .header-top .right-head {
+        display: inline-flex;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .dropdown {}
+
+    .right-head .dropdown {
+        top: 0;
+    }
+
+    .header-top .row {
+        align-items: center;
+    }
+
+    .header-top .right-head .header a {
+        color: #fff;
+        font-size: 22px;
+    }
+
+    .header-top .right-head .header {
+        margin-left: 15px;
+    }
+
+    nav#menu {
+        z-index: 1001;
+        display: none;
+    }
+
+    nav#menu.mm-menu_opened {
+        display: block;
+    }
+    body .container {
+        max-width: 100%;
+    }
+    #top {
+        padding-top: 15px;
+    }
+
+    .title h2 {
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
+
+    .content-box .left h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        line-height: initial;
+    }
+
+    .content-box .left .btn-acc {
+        padding-top: 15px;
+    }
+
+    .btn-acc ul li a {
+        padding: 0;
+        text-align: center;
+        font-size: 15px;
+        height: 40px;
+        line-height: 38px;
+    }
+
+    .content-box .left ul li {
+        flex: 0 0 50%;
+    }
+
+    .content-box .left .btn-acc ul {
+        display: inline-flex;
+        width: 100%;
+    }
+    .content-box .left .btn-acc ul li {
+        padding: 0 5px;
+        margin: 0;
+    }
+    #top .content-box .col-md-5 {
+        order: 2;
+        margin-top: 20px;
+    }
+    .list-number ul li {
+        flex: 0 0 50%;
+        padding: 0;
+        box-sizing: border-box;
+        padding: 0 5px;
+        margin-bottom: 30px;
+    }
+
+    .list-number ul .number {
+        font-size: 30px;
+    }
+
+    .list-number {
+        padding: 30px 0 0 0;
+    }
+    .list-account .item .info-acc {
+        padding: 25px 10px;
+    }
+
+    .list-account .col-md-4 {
+        margin-bottom: 30px;
+    }
+    .list-account .item .title-acc h3 {
+        font-size: 25px;
+    }
+    .list-account .item {
+        transform: scale(1) !important;
+    }
+    #platfrom {
+        padding: 0 0 30px 0;
+    }
+
+    .title-plat {
+        padding: 20px 0 10px 0;
+        margin-bottom: 25px;
+    }
+
+    .info-plat .box-text h3 {
+        margin-bottom: 10px;
+        font-size: 25px;
+    }
+
+    .info-plat .box-text ul {
+        padding-bottom: 10px;
+    }
+    .info-plat .box-img {
+        padding-top: 25px;
+    }
+    .list-service .item .icon {
+        margin-bottom: 15px;
+    }
+
+    .list-service .item {
+        height: 100%;
+        padding: 25px 15px;
+    }
+    .list-service {
+        padding-top: 0;
+    }
+    #partner {
+        padding: 20px 0 0 0;
+    }
+
+    .list-part ul {
+        display: inline-flex;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .list-part ul li {
+        flex: 0 0 50%;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .list-account .row .col-md-4 {
+        padding: 0 5px;
+    }
+
+    .list-account .row {
+        margin: 0 -5px;
+    }
+    .star-trading {
+        display: none;
+    }
+    .api ul li {
+        margin-right: 25px !important;
+    }
+    .api ul {
+        width: 100%;
+        justify-content: normal;
+    }
+
+    .srcoll-mb {
+        overflow-x: auto;
+    }
+    .api ul li:last-child {
+        flex: 0 0 auto;
+    }
+    .info-box {
+        padding: 20px 0 0 0;
+    }
+
+    .info-box .item {
+        margin-bottom: 20px;
+    }
+    .list-logo {
+        padding: 20px 0;
+    }
+
+    .list-logo .col-md-4 {
+        margin-bottom: 20px;
+    }
+
+    .list-logo .col-md-4:last-child {
+        margin-bottom: 0;
+    }
+
+    .footer-bott .item {
+        margin-bottom: 20px;
+    }
+
+    .footer-bott ul li:last-child {
+        padding-bottom: 0;
+    }
+
+    .footer-bott {
+        padding: 20px 0 0 0;
+    }
+
+    footer {
+        padding-bottom: 60px;
+    }
+    .list-logo {
+        padding: 20px 0;
+    }
+
+    .list-logo .col-md-4 {
+        margin-bottom: 20px;
+    }
+
+    .list-logo .col-md-4:last-child {
+        margin-bottom: 0;
+    }
+
+    .footer-bott .item {
+        margin-bottom: 20px;
+    }
+
+    .footer-bott ul li:last-child {
+        padding-bottom: 0;
+    }
+
+    .footer-bott {
+        padding: 20px 0 0 0;
+    }
+
+    footer {
+        padding-bottom: 60px;
+    }
+
+    .footer-top .left li:first-child {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .footer-top .logo {
+        margin-bottom: 10px;
+    }
+
+    .footer-top .left li {
+        padding-right: 0;
+    }
+
+    .footer-top .left li a {
+        font-size: 12px;
+    }
+
+    .footer-top .social li:first-child {
+        padding-left: 0;
+    }
+
+    .footer-top .social li {
+        padding-left: 15px;
+    }
+
+    .footer-top .social li a {
+        font-size: 18px;
+    }
+
+    .footer-top .social ul {
+        text-align: center !important;
+        padding-top: 20px;
+    }
+    .img-abs {
+        display: none;
+    }
+    .content-fx .phone .info {
+        display: none;
+    }
+
+    #phone-mess {
+        height: 290px;
+        top: calc(50% - 145px);
+        z-index: 1001;
+        right: -90px;
+        transition: .3s all;
+    }
+    #phone-mess.active {
+        right: 0;
+    }
+    .clc-fix.d-none {
+        display: block !important;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: #ed1c24;
+        color: #fff;
+        text-align: left;
+        line-height: 45px;
+        font-size: 30px;
+        border-radius: 50%;
+        left: -30px;
+        top: calc(50% - 20px);
+    }
+    .clc-fix.d-none {
+        display: block !important;
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background: #ed1c24;
+        color: #fff;
+        text-align: left;
+        line-height: 45px;
+        font-size: 30px;
+        border-radius: 50%;
+        left: -30px;
+        top: calc(50% - 20px);
+    }
+
+    #phone-mess .clc-fix a {
+        padding-left: 10px;
+        transition: .3s all;
+    }
+    #phone-mess .clc-fix a i {
+        transition: .3s all;
+    }
+    #phone-mess .clc-fix a.active i {
+        transition: .3s all;
+        transform: rotate(180deg);
+    }
+    #phone-mess .clc-fix a.active {
+        line-height: 50px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+    .list-account .item .btn-acc a {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        padding: 0 5px;
+    }
+
+    .list-number ul li {
+        flex: 0 0 calc(100% / 3);
+    }
+
+    .list-part ul li {
+        flex:  0 0 calc(100% / 7);
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+    .header-menu .left ul li a {
+        padding: 25px;
+    }
+
+    .btn-acc ul li a {
+        padding: 0 25px;
+    }
+
+    .content-box .left .btn-acc ul li {
+        flex: 0 0 50%;
+    }
+
+    .content-box .left .btn-acc ul {
+        display: inline-flex;
+        width: 100%;
+    }
+
+    .content-box .left .btn-acc ul li a {
+        padding: 0 5px;
+        text-align: center;
+    }
+    .list-number ul .number {
+        font-size: 40px;
+    }
+
+    .list-number ul li {
+        flex: 0 0 calc(100% / 5);
+        padding: 0 10px;
+    }
+
+    .list-number ul {
+        justify-content: space-between;
+    }
+
+    .list-account .row .col-md-4 {
+        padding: 0 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-account .row {
+        margin: 0 -10px;
+    }
+}
+
+@media (max-width: 1160px) and (min-width: 1024px) {
+    .list-account .row .col-md-4 {
+        padding: 0 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-account .row {
+        margin: 0 -10px;
+    }
+}

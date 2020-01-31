@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../fonts/svn/SVN-GilroyLight.eot');
+    src: url('../fonts/svn/SVN-GilroyLight.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/svn/SVN-GilroyLight.woff2') format('woff2'),
+        url('../fonts/svn/SVN-GilroyLight.woff') format('woff'),
+        url('../fonts/svn/SVN-GilroyLight.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SVN-Gilroy';
+    src: url('../fonts/svn/SVN-GilroyBold.eot');
+    src: url('../fonts/svn/SVN-GilroyBold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/svn/SVN-GilroyBold.woff2') format('woff2'),
+        url('../fonts/svn/SVN-GilroyBold.woff') format('woff'),
+        url('../fonts/svn/SVN-GilroyBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+$svn: 'SVN-Gilroy';
+.svn {
+    font-family: $svn;
+    font-weight: 300;
+}
+.svn-bold {
+    font-family: $svn;
+    font-weight: bold;
+}
