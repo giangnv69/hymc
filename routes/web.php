@@ -23,8 +23,19 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('sign-in', ['as'=>'home.log-in', 'uses'=>'IndexController@getLogin']);
     Route::post('sign-in', ['as'=>'home.sign-in.post', 'uses'=>'IndexController@postLogin']);
 
-
-    Route::get('trading', ['as'=>'home.trading', 'uses'=>'IndexController@getTrading']);
+    Route::group(['prefix' => 'trading'], function () {
+        Route::get('/', ['as'=>'home.trading', 'uses'=>'IndexController@getTrading']);
+        Route::get('/open-trading', ['as'=>'home.openTrading', 'uses'=>'IndexController@openTrading']);
+        Route::post('/open-trading-account', ['as'=>'home.openTradingAccount', 'uses'=>'IndexController@openTradingAccount']);
+        Route::get('/additional-information', ['as'=>'home.additionalInformation', 'uses'=>'IndexController@additionalInformation']);
+        Route::post('/save-additional-information', ['as'=>'home.saveAdditionalInformation', 'uses'=>'IndexController@saveAdditionalInformation']);
+        Route::get('/account-type', ['as'=>'home.accountType', 'uses'=>'IndexController@accountType']);
+        Route::post('/save-account-type', ['as'=>'home.saveAccountType', 'uses'=>'IndexController@saveAccountType']);
+        Route::get('/personal-information', ['as'=>'home.personalInformation', 'uses'=>'IndexController@personalInformation']);
+        Route::post('/save-personal-information', ['as'=>'home.savePersonalInformation', 'uses'=>'IndexController@savePersonalInformation']);
+        Route::get('/declaration', ['as'=>'home.declaration', 'uses'=>'IndexController@declaration']);
+        Route::post('/save-declaration', ['as'=>'home.saveDeclaration', 'uses'=>'IndexController@saveDeclaration']);
+    });
     Route::get('about', ['as'=>'home.about', 'uses'=>'IndexController@getAbout']);
 
 

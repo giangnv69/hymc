@@ -202,4 +202,185 @@ class IndexController extends Controller
         $this->createSeo();
         return view('frontend.pages.about', compact( 'data','brand'));
     }
+
+    public function openTrading()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.open_trading', compact( 'data','brand' ));
+    }
+
+    public function openTradingAccount()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return redirect()->route('home.additionalInformation', ['id' => 1]);
+    }
+
+    public function additionalInformation()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.additional_information', compact( 'data','brand' ));
+    }
+
+    public function saveAdditionalInformation()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return redirect()->route('home.accountType', ['id' => 1]);
+    }
+
+    public function accountType()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.account_type', compact( 'data','brand' ));
+    }
+
+    public function saveAccountType()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return redirect()->route('home.personalInformation', ['id' => 1]);
+    }
+
+    public function personalInformation()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.personal_information', compact( 'data','brand' ));
+    }
+
+    public function savePersonalInformation()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return redirect()->route('home.declaration', ['id' => 1]);
+    }
+
+    public function declaration()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.declaration', compact( 'data','brand' ));
+    }
+
+    public function saveDeclaration()
+    {
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return redirect()->route('home.additionalInformation', ['id' => 1]);
+    }
+
 }

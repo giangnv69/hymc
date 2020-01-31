@@ -45,7 +45,7 @@ $(function() {
     setRandomClass();
     setInterval(function () {
         setRandomClass();
-    }, 20000);
+    }, 2000);
 
     function setRandomClass() {
         var teamList = $('.abs-top');
@@ -63,13 +63,6 @@ $(function() {
 
 });
 
-
-
-// $('.counter').counterUp({
-//   delay: 10,
-//   time: 2000
-// });
-
 // jQuery(document).ready(function( $ ) {
 //   $("#menu").mmenu({
 //      "extensions": [
@@ -84,17 +77,47 @@ $(".clc-fix a").click(function() {
     $(this).toggleClass('active');  
 });
 
-// $(document).ready(function(){
-    
-//     $('ul.tabs li').click(function(){
-//         var tab_id = $(this).attr('data-tab');
 
-//         $('ul.tabs li').removeClass('current');
-//         $('.tab-content-tradd').removeClass('current');
-
-//         $(this).addClass('current');
-//         $("#"+tab_id).addClass('current');
-//     })
-
-// })
-
+$('.trading').animationCounter({
+        start: 0,
+        end: 900000,
+        delay: 100,
+        step: 1000,
+        txt: '',
+        type: "increase",
+        fix: false
+    });
+    $('.transaction').animationCounter({
+        start: 0,
+        end: 10000,
+        step: 100,
+        delay: 100,
+        txt: '',
+        type: "increase",
+        fix: true
+    });
+    $('.spread').animationCounter({
+        start: 1,
+        end: 0.2,
+        step: 0.1,
+        delay: 300,
+        type: "decrease",
+        fix: true
+    });
+    $('.coverage').animationCounter({
+        start: 0,
+        end: 2500000,
+        step: 100000,
+        delay: 150,
+        type: "increase",
+        fix: false
+    });
+    $('.fee').animationCounter({
+        start: 10,
+        end: 0.5,
+        step: 0.5,
+        delay: 200,
+        txt: '%',
+        type: "decrease",
+        fix: true
+    });
