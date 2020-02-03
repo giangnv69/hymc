@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TradingAccount;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use DateTime;
@@ -18,6 +19,7 @@ use App\Models\PagesMeta;
 use App\Models\Members;
 use Hash;
 use Auth;
+use Validator;
 
 class IndexController extends Controller
 {
@@ -221,166 +223,100 @@ class IndexController extends Controller
         return view('frontend.pages.open_trading', compact( 'data','brand' ));
     }
 
-    public function openTradingAccount()
+    public function openTradingAccount(Request $request)
     {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
+        $validator = Validator::make($request->only(
+            'f_name',
+            'l_name',
+            'email',
+            'first_number',
+            'phone_number',
+            'country',
+            'check_ipay',
+            'date_birth',
+            'month_birth',
+            'year_birth',
+            'address',
+            'city',
+            'post_code',
+            'account_type',
+            'account_currency',
+            'is_us',
+            'is_pep',
+            'password',
+            're_password'
+        ), [
+                'f_name' => 'required',
+                'l_name' => 'required',
+                'email' => 'required|email|unique:trading_account,email',
+                'first_number' => 'required',
+                'phone_number' => 'required',
+                'country' => 'required',
+//                'check_ipay' => 'required',
+                'date_birth' => 'required|numeric|min:1|max:31',
+                'month_birth' => 'required|numeric|min:1|max:12',
+                'year_birth' => 'required|numeric',
+                'address' => 'required',
+                'city' => 'required',
+                'post_code' => 'required',
+                'account_type' => 'required',
+                'account_currency' => 'required',
+                'is_us' => 'required',
+                'is_pep' => 'required',
+                'password' => 'required',
+                're_password' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors(),
+            ]);
         }
 
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
+        if (empty($request->password) || empty($request->re_password)) {
+            return response()->json([
+                'status' => false,
+                'message' => "Please enter a password",
+            ]);
         }
 
-        $this->createSeo();
-        return redirect()->route('home.additionalInformation', ['id' => 1]);
+        if ($request->password == $request->re_password) {
+            return response()->json([
+                'status' => false,
+                'message' => "Re password invalid",
+            ]);
+        }
+
+        $check_email = TradingAccount::where('email', $request->email)->first();
+
+        if (empty($check_email)) {
+            return response()->json([
+                'status' => false,
+                'message' => "The email has already been taken.",
+            ]);
+        }
+        $data = new TradingAccount();
+        $data->check_ipay = !empty($request->check_ipay) && $request->check_ipay == true ? 1 : 0;
+        $data->is_us = !empty($request->is_us) && $request->is_us == true ? 1 : 0;
+        $data->is_pep = !empty($request->is_pep) && $request->is_pep == true ? 1 : 0;
+        $data->f_name = $request->f_name;
+        $data->l_name = $request->l_name;
+        $data->email = $request->email;
+        $data->first_number = $request->first_number;
+        $data->phone_number = $request->phone_number;
+        $data->country = $request->country;
+        $data->date_birth = $request->date_birth;
+        $data->month_birth = $request->month_birth;
+        $data->year_birth = $request->year_birth;
+        $data->address = $request->address;
+        $data->city = $request->city;
+        $data->post_code = $request->post_code;
+        $data->account_type = $request->account_type;
+        $data->account_currency = $request->account_currency;
+        $data->account_currency = $request->account_currency;
+        $data->password = Hash::make($request->password.$request->email);
+        $data->save();
+        dd($data);
+
     }
-
-    public function additionalInformation()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return view('frontend.pages.additional_information', compact( 'data','brand' ));
-    }
-
-    public function saveAdditionalInformation()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return redirect()->route('home.accountType', ['id' => 1]);
-    }
-
-    public function accountType()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return view('frontend.pages.account_type', compact( 'data','brand' ));
-    }
-
-    public function saveAccountType()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return redirect()->route('home.personalInformation', ['id' => 1]);
-    }
-
-    public function personalInformation()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return view('frontend.pages.personal_information', compact( 'data','brand' ));
-    }
-
-    public function savePersonalInformation()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return redirect()->route('home.declaration', ['id' => 1]);
-    }
-
-    public function declaration()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return view('frontend.pages.declaration', compact( 'data','brand' ));
-    }
-
-    public function saveDeclaration()
-    {
-        if (app()->getLocale() == 'en') {
-            $brand =  Pages::find(1);
-        }else{
-            $brand =  Pages::find(2);
-        }
-
-        if (app()->getLocale() == 'en') {
-            $data =  Pages::find(3);
-        }else{
-            $data =  Pages::find(3);
-        }
-
-        $this->createSeo();
-        return redirect()->route('home.additionalInformation', ['id' => 1]);
-    }
-
 }
