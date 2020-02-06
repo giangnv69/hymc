@@ -487,12 +487,12 @@ console.log(data);
                 if(data.agree_1 != undefined && data.agree_2 != undefined) {
                     $.ajax({
                         type: "POST",
-                        url: "{{ __BASE_URL__ }}/trading/open-trading-account",
+                        url: "{{ route('home.openTradingAccount') }}",
                         data: data,
                         cache: false,
                         success: function(res){
                             if(res.status) {
-                                window.location.href = '{{ __BASE_URL__ }}';
+                                window.location.href = '{{ route('home.index') }}';
                             }
                             else {
                                 alert(res.message);
