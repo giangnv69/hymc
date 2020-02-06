@@ -315,8 +315,87 @@ class IndexController extends Controller
         $data->account_currency = $request->account_currency;
         $data->account_currency = $request->account_currency;
         $data->password = Hash::make($request->password.$request->email);
-        $data->save();
-        dd($data);
 
+        if ($data->save()) {
+            return response()->json([
+                'status' => true,
+                'message' => "Success",
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => "Server error",
+        ]);
     }
+
+    public function myProfile()
+    {
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
+        $user = Auth::guard('member')->user();
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+
+//        $get_info =
+
+        return view('frontend.pages.my_profile', compact( 'data','brand' ));
+    }
+
+    public function verify()
+    {
+        if(Auth::guard('member')->check()){
+            return redirect('/');
+        }
+        $user = Auth::guard('member')->user();
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.verify', compact( 'data','brand' ));
+    }
+
+    public function settingProfile()
+    {
+        if(Auth::guard('member')->check()){
+            return redirect('/');
+        }
+        $user = Auth::guard('member')->user();
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $this->createSeo();
+        return view('frontend.pages.setting-profile', compact( 'data','brand' ));
+    }
+
+
 }

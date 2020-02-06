@@ -29,6 +29,9 @@ Route::group(['middleware' => 'locale'], function() {
         Route::post('/open-trading-account', ['as'=>'home.openTradingAccount', 'uses'=>'IndexController@openTradingAccount']);
     });
     Route::get('about', ['as'=>'home.about', 'uses'=>'IndexController@getAbout']);
+    Route::get('my-profile', ['as'=>'home.my-profile', 'uses'=>'IndexController@myProfile']);
+    Route::get('my-profile/settings', ['as'=>'home.my-profile.settings', 'uses'=>'IndexController@settingProfile']);
+    Route::get('verify', ['as'=>'home.verify', 'uses'=>'IndexController@verify']);
 
 
 });

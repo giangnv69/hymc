@@ -27,19 +27,6 @@ $(document).bind('click', function(e){
     if (! $(e.target).parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
 });
 
-
-// $('.stat-number').each(function () {
-//    var size = $(this).text().split(".")[1] ? $(this).text().split(".")[1].length : 0;
-//    $(this).prop('Counter', 0).animate({
-//       Counter: $(this).text()
-//    }, {
-//       duration: 5000,
-//       step: function (func) {
-//          $(this).text(parseFloat(func).toFixed(size));
-//       }
-//    });
-// });
-
 $(function() {
 
     setRandomClass();
@@ -63,6 +50,20 @@ $(function() {
 
 });
 
+$(document).ready(function(){
+    
+    $('.list-method .item').click(function(){
+        var tab_id = $(this).attr('data-tab');
+
+        $('.list-method .item').removeClass('active');
+        $('.tab-form').removeClass('active');
+
+        $(this).addClass('active');
+        $("#"+tab_id).addClass('active');
+    })
+
+}) 
+
 // jQuery(document).ready(function( $ ) {
 //   $("#menu").mmenu({
 //      "extensions": [
@@ -77,47 +78,74 @@ $(".clc-fix a").click(function() {
     $(this).toggleClass('active');  
 });
 
+$(".btn-sett a").click(function() {    
+    $('.btn-sett a img').toggleClass('active');  
+    $('.sub-setting').toggleClass('active'); 
+});
 
-$('.trading').animationCounter({
-        start: 0,
-        end: 900000,
-        delay: 100,
-        step: 1000,
-        txt: '',
-        type: "increase",
-        fix: false
+$(document).ready(function(){
+  $('.list-make .list-method a, .choose-acc').click(function(){
+    $('.list-make .list-method a, .choose-acc').removeClass("active");
+    $(this).addClass("active");
+  });
+});
+
+$(".title-step a, .none-file, .clc-show").click(function() {    
+    $(this).parents().children('.form-left .form-step').animate({ 'height': 'toggle' }); 
+    $(this).parents().children('.upload-file').animate({ 'height': 'toggle' }); 
+    $(this).parents().children('.info-item-creat').animate({ 'height': 'toggle' }); 
+    $(this).toggleClass('active'); 
+});
+
+"use strict";
+function dragNdrop(event) {
+    var fileName = URL.createObjectURL(event.target.files[0]);
+    var preview = document.getElementById("preview");
+    var previewImg = document.createElement("img");
+    previewImg.setAttribute("src", fileName);
+    preview.innerHTML = "";
+    preview.appendChild(previewImg);
+}
+function drag() {
+    document.getElementById('uploadFile').parentNode.className = 'draging dragBox';
+}
+function drop() {
+    document.getElementById('uploadFile').parentNode.className = 'dragBox';
+}
+
+function dragNdrop_back(event) {
+    var fileName = URL.createObjectURL(event.target.files[0]);
+    var preview_back = document.getElementById("preview-back");
+    var previewImg = document.createElement("img");
+    previewImg.setAttribute("src", fileName);
+    preview_back.innerHTML = "";
+    preview_back.appendChild(previewImg);
+}
+function drag_back() {
+    document.getElementById('uploadFile').parentNode.className = 'draging dragBox';
+}
+function drop_back() {
+    document.getElementById('uploadFile').parentNode.className = 'dragBox';
+}
+
+$('.share-link').slick({
+    autoplay: false,
+    arrow: true,
+    dots: true,
+    slidesToShow: 1,
+    slidesToScroll: 1, 
+    prevArrow: '',
+    nextArrow: '',
+});
+
+$(function() {
+    $('#clc-copy').click(function() {
+        $(this).prev("input").focus();
+        $(this).prev("input").select();
+     
+        document.execCommand('copy');
+        // $(".copied").text("Copied to clipboard").show().fadeOut(1200);
+        console.log(123);
     });
-    $('.transaction').animationCounter({
-        start: 0,
-        end: 10000,
-        step: 100,
-        delay: 100,
-        txt: '',
-        type: "increase",
-        fix: true
-    });
-    $('.spread').animationCounter({
-        start: 1,
-        end: 0.2,
-        step: 0.1,
-        delay: 300,
-        type: "decrease",
-        fix: true
-    });
-    $('.coverage').animationCounter({
-        start: 0,
-        end: 2500000,
-        step: 100000,
-        delay: 150,
-        type: "increase",
-        fix: false
-    });
-    $('.fee').animationCounter({
-        start: 10,
-        end: 0.5,
-        step: 0.5,
-        delay: 200,
-        txt: '%',
-        type: "decrease",
-        fix: true
-    });
+
+});

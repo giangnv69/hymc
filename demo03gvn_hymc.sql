@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th1 30, 2020 lúc 01:36 PM
--- Phiên bản máy phục vụ: 10.3.21-MariaDB
--- Phiên bản PHP: 7.3.6
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th2 06, 2020 lúc 06:09 AM
+-- Phiên bản máy phục vụ: 10.1.38-MariaDB
+-- Phiên bản PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -33,7 +33,7 @@ CREATE TABLE `image` (
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `link` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `decs` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `decs` text COLLATE utf8mb4_unicode_ci,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -61,10 +61,10 @@ INSERT INTO `image` (`id`, `image`, `name`, `link`, `decs`, `type`, `status`, `c
 
 CREATE TABLE `members` (
   `id` int(10) UNSIGNED NOT NULL,
-  `country` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` text COLLATE utf8mb4_unicode_ci,
+  `email` text COLLATE utf8mb4_unicode_ci,
+  `remember_token` text COLLATE utf8mb4_unicode_ci,
+  `password` text COLLATE utf8mb4_unicode_ci,
   `status` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -77,7 +77,8 @@ CREATE TABLE `members` (
 INSERT INTO `members` (`id`, `country`, `email`, `remember_token`, `password`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Việt Nam', 'nvtrong1210@gmail.com', 'i80gqDpi5MS5NwZD8G01JPdwjK11Yw8gpgADVPZdPuRGT03baMJiLwfhFtLW', '$2y$10$KLxsRGPOWuCSo/xu/pZd5.D6Il779BHv8mk2vf7/h8TTVpne17Rtm', 1, '2020-01-19 08:11:40', '2020-01-19 08:11:40'),
 (2, 'Việt Nam', 'nvtrong111@gmail.com', NULL, '$2y$10$MLpZlO4s5CJMUhco6G2wMeD3uLRAwgmgz6MikXxo8SxQKiKPncS12', 1, '2020-01-19 08:19:37', '2020-01-19 08:19:37'),
-(3, 'vietnam', 'ledinhson209@gmail.com', 'KNhA503ZTZu2F0TpIuRH30tQSykBzeSs6spwzC24h91CzEVuyrHWizUDT7FQ', '$2y$10$QfkeOF2nak0WcByoQ6xcHu4eaU9m7UtLe6Qoo3ZiYpqgNeyYy1gOK', 1, '2020-01-20 09:13:04', '2020-01-20 09:13:04');
+(3, 'vietnam', 'ledinhson209@gmail.com', 'KNhA503ZTZu2F0TpIuRH30tQSykBzeSs6spwzC24h91CzEVuyrHWizUDT7FQ', '$2y$10$QfkeOF2nak0WcByoQ6xcHu4eaU9m7UtLe6Qoo3ZiYpqgNeyYy1gOK', 1, '2020-01-20 09:13:04', '2020-01-20 09:13:04'),
+(4, 'HN', 'gg@gmail.com', 'F2EZBlvdO3ez3FaRCki10nXhNSvhg8Pk3X6h3GNBh6YRoidw0PD6tK6iOCa8', '$2y$10$ntzCGtUIa64WxnXNCaoBqe9qCNdoWri4IYyraGW3xXbJx2ps7dbAm', 1, '2020-01-31 02:14:55', '2020-01-31 02:14:55');
 
 -- --------------------------------------------------------
 
@@ -88,12 +89,12 @@ INSERT INTO `members` (`id`, `country`, `email`, `remember_token`, `password`, `
 CREATE TABLE `menu` (
   `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(11) DEFAULT NULL,
-  `title_vi` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title_en` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `position` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title_vi` text COLLATE utf8mb4_unicode_ci,
+  `title_en` text COLLATE utf8mb4_unicode_ci,
+  `url` text COLLATE utf8mb4_unicode_ci,
+  `position` text COLLATE utf8mb4_unicode_ci,
   `id_group` int(11) DEFAULT NULL,
-  `class` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `class` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -118,8 +119,8 @@ INSERT INTO `menu` (`id`, `parent_id`, `title_vi`, `title_en`, `url`, `position`
 
 CREATE TABLE `menugroup` (
   `id` int(10) UNSIGNED NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `position` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci,
+  `position` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -176,7 +177,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `options` (
   `id` int(10) UNSIGNED NOT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -200,13 +201,13 @@ INSERT INTO `options` (`id`, `type`, `content`, `created_at`, `updated_at`) VALU
 CREATE TABLE `pages` (
   `id` int(10) UNSIGNED NOT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name_page` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `route` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_keyword` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name_page` text COLLATE utf8mb4_unicode_ci,
+  `route` text COLLATE utf8mb4_unicode_ci,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `image` text COLLATE utf8mb4_unicode_ci,
+  `meta_title` text COLLATE utf8mb4_unicode_ci,
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
+  `meta_keyword` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -232,6 +233,47 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `trading_account`
+--
+
+CREATE TABLE `trading_account` (
+  `trading_account_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `f_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `l_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` text COLLATE utf8_unicode_ci,
+  `first_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `check_ipay` int(11) DEFAULT NULL,
+  `date_birth` int(11) DEFAULT NULL,
+  `month_birth` int(11) DEFAULT NULL,
+  `year_birth` int(11) DEFAULT NULL,
+  `address` text COLLATE utf8_unicode_ci,
+  `city` text COLLATE utf8_unicode_ci,
+  `post_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `account_type` enum('fixed','classic','row') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `account_currency` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_us` tinyint(4) DEFAULT NULL,
+  `is_pep` tinyint(4) DEFAULT NULL,
+  `password` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `trading_account`
+--
+
+INSERT INTO `trading_account` (`trading_account_id`, `user_id`, `f_name`, `l_name`, `email`, `first_number`, `phone_number`, `country`, `check_ipay`, `date_birth`, `month_birth`, `year_birth`, `address`, `city`, `post_code`, `account_type`, `account_currency`, `is_us`, `is_pep`, `password`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, NULL, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', 1, 1, '123321', '2020-02-02 13:14:24', '2020-02-02 13:14:24', NULL),
+(2, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, NULL, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', 1, 1, '123321', '2020-02-02 13:15:27', '2020-02-02 13:15:27', NULL),
+(3, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, 1989, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', 1, 1, '123321', '2020-02-02 13:16:13', '2020-02-02 13:16:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -316,6 +358,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Chỉ mục cho bảng `trading_account`
+--
+ALTER TABLE `trading_account`
+  ADD PRIMARY KEY (`trading_account_id`);
+
+--
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
@@ -337,7 +385,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT cho bảng `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `menu`
@@ -368,6 +416,12 @@ ALTER TABLE `options`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `trading_account`
+--
+ALTER TABLE `trading_account`
+  MODIFY `trading_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

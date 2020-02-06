@@ -487,11 +487,16 @@ console.log(data);
                 if(data.agree_1 != undefined && data.agree_2 != undefined) {
                     $.ajax({
                         type: "POST",
-                        url: "/hymc/trading/open-trading-account",
+                        url: "{{ __BASE_URL__ }}/trading/open-trading-account",
                         data: data,
                         cache: false,
-                        success: function(data1){
-                            console.log(data1);
+                        success: function(res){
+                            if(res.status) {
+                                window.location.href = '{{ __BASE_URL__ }}';
+                            }
+                            else {
+                                alert(res.message);
+                            }
                         }
                     });
                 }
