@@ -25,6 +25,8 @@ class TradingAccount extends Model
         'account_currency',
         'is_us',
         'is_pep',
+        'is_read_policy',
+        'is_access_noti',
         'password',
     ];
 }

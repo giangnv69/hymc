@@ -34,28 +34,28 @@
                                                     <div class="col-md-6">
                                                         <div class="item">
                                                             <label for="">First Name</label>
-                                                            <input type="text" value="Mai">
+                                                            <input type="text" name="f_name" value="{{ $get_info->f_name }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="item">
                                                             <label for="">Last name</label>
-                                                            <input type="text" value="Van Anh">
+                                                            <input type="text" name="l_name" value="{{ $get_info->l_name }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="item">
                                                             <label for="">Email</label>
-                                                            <input type="text" value="example@email.com">
+                                                            <input type="text" name="email" value="{{ $get_info->email }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3" style="padding-right: 0">
                                                         <div class="item item-nation">
-                                                            <dl class="dropdown">
+                                                            <dl class="dropdown first_number">
                                                                 <dt><a><span class="selected"><img src="{{ __BASE_URL__ }}/images/tran1.png" class="img-fluid" alt="">+84</span><i class="fa fa-angle-down"></i></a></dt>
                                                                 <dd>
                                                                     <ul style="display: none;">
-                                                                        <li><a><img src="{{ __BASE_URL__ }}/images/tran1.png" class="img-fluid" alt="">+84</a></li>
+                                                                        <li class="number_first"><a><img src="{{ __BASE_URL__ }}/images/tran1.png" class="img-fluid" alt="">+84</a></li>
                                                                         <li><a><img src="{{ __BASE_URL__ }}/images/tran2.png" class="img-fluid" alt="">+07</a></li>
                                                                         <li><a><img src="{{ __BASE_URL__ }}/images/tran1.png" class="img-fluid" alt="">+84</a></li>
                                                                         <li><a><img src="{{ __BASE_URL__ }}/images/tran2.png" class="img-fluid" alt="">+07</a></li>
@@ -68,10 +68,11 @@
                                                             </dl>
                                                         </div>
                                                     </div>
+                                                    <input type="hidden" name="first_number" value="{{ $get_info->first_number }}">
                                                     <div class="col-md-9" style="padding-left: 0;">
                                                         <div class="item item-phone">
                                                             <label for="">Phone</label>
-                                                            <input type="text" value="0123 466 789">
+                                                            <input type="text" name="phone_number" value="{{ $get_info->first_number }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -86,18 +87,18 @@
                                                     <div class="col-md-12">
                                                         <div class="item">
                                                             <label for="">Country of residence</label>
-                                                            <dl class="dropdown">
-                                                                <dt><a><span class="selected"><img src="{{ __BASE_URL__ }}/images/tran2.png" class="img-fluid" alt="">Vietnam</span><i class="fa fa-angle-down"></i></a></dt>
+                                                            <dl class="dropdown country">
+                                                                <dt><a><span class="selected"><img src="images/tran2.png" class="img-fluid" alt="">Vietnam</span><i class="fa fa-angle-down"></i></a></dt>
                                                                 <dd>
                                                                     <ul style="display: none;">
-                                                                        <li><a><img src="{{ __BASE_URL__ }}/images/tran2.png" class="img-fluid" alt="">Vietnam</a></li>
-                                                                        <li><a><img src="{{ __BASE_URL__ }}/images/tran1.png" class="img-fluid" alt="">England</a></li>
+                                                                        <li class="first_country"><a><img src="images/tran2.png" class="img-fluid" alt="">Vietnam</a></li>
+                                                                        <li><a><img src="images/tran1.png" class="img-fluid" alt="">England</a></li>
                                                                     </ul>
                                                                 </dd>
                                                             </dl>
                                                         </div>
                                                         <div class="remember">
-                                                            <input type="checkbox" id="remember-01"><label for="remember-01">My country of residence and country where Ipay taxes are the same as the below country</label>
+                                                            <input type="checkbox" name="check_ipay" {{ $get_info->first_number ? 'checked' : '' }} value="true" id="remember-01"><label for="remember-01">My country of residence and country where Ipay taxes are the same as the below country</label>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -107,19 +108,19 @@
                                                                 <div class="col-md-4">
                                                                     <div class="item">
                                                                         <label for="">Date</label>
-                                                                        <input type="number" value="27">
+                                                                        <input type="number" name="date_birth" value="{{ $get_info->first_number }}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="item">
                                                                         <label for="">Month</label>
-                                                                        <input type="number" value="12">
+                                                                        <input type="number" name="month_birth" value="{{ $get_info->first_number }}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="item">
                                                                         <label for="">Year</label>
-                                                                        <input type="number" value="1989">
+                                                                        <input type="number" name="year_birth" value="{{ $get_info->first_number }}">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -130,20 +131,20 @@
                                                             <span>Address</span>
                                                             <div class="item">
                                                                 <label for="">Street name and number</label>
-                                                                <input type="text" value="G3 Vinhome GreenBay Me Tri Nam Tu Liem">
+                                                                <input type="text" name="address" value="{{ $get_info->first_number }}">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="item">
                                                             <label for="">City</label>
-                                                            <input type="text" value="Ha Noi">
+                                                            <input type="text" name="city" value="{{ $get_info->first_number }}">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="item">
                                                             <label for="">Postcode</label>
-                                                            <input type="text" value="100000">
+                                                            <input type="text" name="post_code" value="{{ $get_info->first_number }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -159,14 +160,14 @@
                                                                 <div class="col-md-4">
                                                                     <div class="itme-choose text-center">
                                                                         <div class="choose">
-                                                                            <input type="radio" id="Reportable-1" name="radio-group" checked><label for="Reportable-1">Yes</label>
+                                                                            <input type="radio" id="Reportable-1" name="is_us" value="true" {{ $get_info->is_us == 1 ? 'checked' : '' }}><label for="Reportable-1">Yes</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="itme-choose text-center">
                                                                         <div class="choose">
-                                                                            <input type="radio" id="Reportable-2" name="radio-group" ><label for="Reportable-2">No</label>
+                                                                            <input type="radio" id="Reportable-2" name="is_us" value="false" {{ $get_info->is_us == 0 ? 'checked' : '' }}><label for="Reportable-2">No</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -180,14 +181,14 @@
                                                                 <div class="col-md-4">
                                                                     <div class="itme-choose text-center">
                                                                         <div class="choose">
-                                                                            <input type="radio" id="Reportable-3" name="radio-group1" checked><label for="Reportable-3">Yes</label>
+                                                                            <input type="radio" id="Reportable-3" name="is_pep" value="true" {{ $get_info->is_pep == 0 ? 'checked' : '' }}><label for="Reportable-3">Yes</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <div class="itme-choose text-center">
                                                                         <div class="choose">
-                                                                            <input type="radio" id="Reportable-4" name="radio-group1" ><label for="Reportable-4">No</label>
+                                                                            <input type="radio" id="Reportable-4" name="is_pep" value="false" {{ $get_info->is_pep == 0 ? 'checked' : '' }}><label for="Reportable-4">No</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -215,13 +216,13 @@
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div class="itme-choose text-center">
-                                                                        <input type="password" class="pass-val" value="123456789">
+                                                                        <input type="password" class="pass-val" name="password" value="">
                                                                         <span class="icon-pass"><img src="{{ __BASE_URL__ }}/images/pass.png" class="img-fluid" alt=""></span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="itme-choose text-center">
-                                                                        <input type="password" class="pass-val" value="123456789">
+                                                                        <input type="password" class="pass-val" name="re_password" value="">
                                                                         <span class="icon-pass"><img src="{{ __BASE_URL__ }}/images/pass.png" class="img-fluid" alt=""></span>
                                                                     </div>
                                                                 </div>
@@ -231,15 +232,15 @@
                                                     <div class="col-md-12">
                                                         <div class="item-list">
                                                             <div class="item-check itme-choose">
-                                                                <input type="checkbox" id="fruit1" name="fruit-1" value="">
-                                                                <label for="fruit1">I, Mai Van Anh, declare that I have carefully read and understood HYCM’s <a href="">Customer Agreement, Terms of Business, Privacy Policy</a> and all other policies as found here which I fully accept and agree with. I accept I am electronically signing these documents, and that this is a legally binding contractual agreement.</label>
+                                                                <input type="checkbox" id="fruit1" name="agree_1" value="true">
+                                                                <label for="fruit1">I, <span class="name_user"></span>, declare that I have carefully read and understood HYCM’s <a href="">Customer Agreement, Terms of Business, Privacy Policy</a> and all other policies as found here which I fully accept and agree with. I accept I am electronically signing these documents, and that this is a legally binding contractual agreement.</label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="item-list">
                                                             <div class="item-check itme-choose">
-                                                                <input type="checkbox" id="fruit2" name="fruit-2" value="">
+                                                                <input type="checkbox" id="fruit2" name="agree_2" value="true">
                                                                 <label for="fruit2">I agree to receve your newsletters, special offers and also agree tobe contacted by HYCM representatives via phone or e-mail. Iunderstand I can opt out From receiving these offers/new sletters any time I wish to.</label>
                                                             </div>
                                                         </div>
@@ -323,64 +324,16 @@
             data.agree_1 = $('.step_create_account_tradding input[ name = agree_1 ]:checked').val();
             data.agree_2 = $('.step_create_account_tradding input[ name = agree_2 ]:checked').val();
             console.log(data);
-            if (step_next == 'tab_2') {
-                if(data.f_name != '' && data.l_name != '' && data.email != '' && data.first_number != '' && data.phone_number != '' ) {
-                    $('.step_create_account_tradding .step').hide();
-                    $('.step_create_account_tradding .step.' + step_next).show();
-                }
-                else {
-                    alert('Input not empty');
-                }
-            }
-            if (step_next == 'tab_3') {
-                if(data.country != '' && data.date_birth != '' && data.month_birth != '' && data.year_birth != '' && data.address != '' && data.post_code != '' ) {
-                    $('.step_create_account_tradding .step').hide();
-                    $('.step_create_account_tradding .step.' + step_next).show();
-                }
-                else {
-                    alert('Input not empty');
-                }
-            }
-            if (step_next == 'tab_4') {
-                if(data.account_type != '' && data.account_currency != '' ) {
-                    $('.step_create_account_tradding .step').hide();
-                    $('.step_create_account_tradding .step.' + step_next).show();
-                }
-                else {
-                    alert('Input not empty');
-                }
-            }
-            if (step_next == 'tab_5') {
-                if(data.is_us != '' && data.is_pep != '' && data.email != '' && data.password != '' && data.re_password != '') {
-                    if (data.password != data.re_password) {
-                        alert('Password is invalid');
-                        return;
-                    }
-                    $('.step_create_account_tradding .step .name_user').html(data.f_name + ' ' + data.l_name);
-                    $('.step_create_account_tradding .step').hide();
-                    $('.step_create_account_tradding .step.' + step_next).show();
-                }
-                else {
-                    alert('Input not empty');
-                }
-            }
-            if(step_next == 'tab_final') {
-                if(data.agree_1 != undefined && data.agree_2 != undefined) {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ __BASE_URL__ }}/trading/open-trading-account",
-                        data: data,
-                        cache: false,
-                        success: function(data1){
-                            console.log(data1);
-                        }
-                    });
-                }
-                else {
-                    alert('Access declare');
-                }
 
-            }
+            $.ajax({
+                type: "POST",
+                url: "{{ __BASE_URL__ }}/my-profile/save-settings",
+                data: data,
+                cache: false,
+                success: function(data1){
+                    console.log(data1);
+                }
+            });
         });
         function setFirstNumber() {
             $('.step_create_account_tradding input[ name = first_number ]').val($('.first_number li.number_first').text());

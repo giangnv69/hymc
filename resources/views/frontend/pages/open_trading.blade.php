@@ -131,19 +131,19 @@
                                             <div class="col-md-4">
                                                 <div class="item">
                                                     <label for="">Date</label>
-                                                    <input type="number" name="date_birth" value="27">
+                                                    <input type="number" name="date_birth" value="">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="item">
                                                     <label for="">Month</label>
-                                                    <input type="number" name="month_birth" value="12">
+                                                    <input type="number" name="month_birth" value="">
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="item">
                                                     <label for="">Year</label>
-                                                    <input type="number" name="year_birth" value="1989">
+                                                    <input type="number" name="year_birth" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -154,20 +154,20 @@
                                         <span>Address</span>
                                         <div class="item">
                                             <label for="">Street name and number</label>
-                                            <input type="text" name="address" value="G3 Vinhome GreenBay Me Tri Nam Tu Liem">
+                                            <input type="text" name="address" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="item">
                                         <label for="">City</label>
-                                        <input type="text" name="city" value="Ha Noi">
+                                        <input type="text" name="city" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="item">
                                         <label for="">Postcode</label>
-                                        <input type="text" name="post_code" value="100000">
+                                        <input type="text" name="post_code" value="">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -341,13 +341,13 @@
                                             <div class="col-md-6">
                                                 <div class="itme-choose text-center">
                                                     <input type="password" class="pass-val" name="password" value="">
-                                                    <span class="icon-pass"><img src="images/pass.png" class="img-fluid" alt=""></span>
+                                                    <span class="icon-pass"><img src="{{ __BASE_URL__ }}/images/pass.png" class="img-fluid" alt=""></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="itme-choose text-center">
                                                     <input type="password" class="pass-val" name="re_password" value="">
-                                                    <span class="icon-pass"><img src="images/pass.png" class="img-fluid" alt=""></span>
+                                                    <span class="icon-pass"><img src="{{ __BASE_URL__ }}/images/pass.png" class="img-fluid" alt=""></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -416,6 +416,11 @@
 @section('script')
     <script src="{{ __BASE_URL__ }}/js/tool.min.js"></script>
     <script>
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
         $('.step_create_account_tradding .btn-submit').click(function () {
             var step_next = $(this).attr('step_next');
             var data = {};
@@ -441,9 +446,14 @@
             data.re_password = $('.step_create_account_tradding input[ name = re_password ]').val();
             data.agree_1 = $('.step_create_account_tradding input[ name = agree_1 ]:checked').val();
             data.agree_2 = $('.step_create_account_tradding input[ name = agree_2 ]:checked').val();
-console.log(data);
+
             if (step_next == 'tab_2') {
                 if(data.f_name != '' && data.l_name != '' && data.email != '' && data.first_number != '' && data.phone_number != '' ) {
+                    if (!validateEmail(data.email)) {
+                        alert('Email invalid');
+                        return;
+                    }
+
                     $('.step_create_account_tradding .step').hide();
                     $('.step_create_account_tradding .step.' + step_next).show();
                 }
@@ -472,7 +482,7 @@ console.log(data);
             if (step_next == 'tab_5') {
                 if(data.is_us != '' && data.is_pep != '' && data.email != '' && data.password != '' && data.re_password != '') {
                     if (data.password != data.re_password) {
-                        alert('Password is invalid');
+                        alert('Password invalid');
                         return;
                     }
                     $('.step_create_account_tradding .step .name_user').html(data.f_name + ' ' + data.l_name);
@@ -484,7 +494,7 @@ console.log(data);
                 }
             }
             if(step_next == 'tab_final') {
-                if(data.agree_1 != undefined && data.agree_2 != undefined) {
+                // if(data.agree_1 != undefined && data.agree_2 != undefined) {
                     $.ajax({
                         type: "POST",
                         url: "{{ route('home.openTradingAccount') }}",
@@ -500,11 +510,10 @@ console.log(data);
                             }
                         }
                     });
-                }
-                else {
-                    alert('Access declare');
-                }
-
+                // }
+                // else {
+                //     alert('Access declare');
+                // }
             }
         });
         function setFirstNumber() {

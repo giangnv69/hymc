@@ -29,10 +29,10 @@
                                 <div class="info-account">
                                     <div class="thumbs"><img src="{{ __BASE_URL__ }}/images/acc.png" class="img-fluid" alt=""></div>
                                     <div class="info-thumbs">
-                                        <div class="name">Mai Van anh</div>
-                                        <p>example@email.com</p>
+                                        <div class="name">{{$get_info->f_name.' '.$get_info->l_name}}</div>
+                                        <p>{{$get_info->email}}</p>
                                         <div class="notice">
-                                            <a href="">
+                                            <a href="{{ route('home.verify') }}">
                                                 <img src="{{ __BASE_URL__ }}/images/notice.png" class="img-fluid" alt="">
                                                 <span>Verify your profile</span>
                                             </a>

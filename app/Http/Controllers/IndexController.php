@@ -219,8 +219,9 @@ class IndexController extends Controller
             $data =  Pages::find(3);
         }
 
+        $route_name = \Request::route()->getName();
         $this->createSeo();
-        return view('frontend.pages.open_trading', compact( 'data','brand' ));
+        return view('frontend.pages.open_trading', compact( 'data','brand', 'route_name' ));
     }
 
     public function openTradingAccount(Request $request)
@@ -269,7 +270,8 @@ class IndexController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'message' => $validator->errors(),
+                'message_error' => $validator->errors(),
+                'message' => 'Server error',
             ]);
         }
 
@@ -299,6 +301,8 @@ class IndexController extends Controller
         $data->check_ipay = !empty($request->check_ipay) && $request->check_ipay == true ? 1 : 0;
         $data->is_us = !empty($request->is_us) && $request->is_us == true ? 1 : 0;
         $data->is_pep = !empty($request->is_pep) && $request->is_pep == true ? 1 : 0;
+        $data->is_read_policy = !empty($request->agree_1) && $request->agree_1 == true ? 1 : 0;
+        $data->is_access_noti = !empty($request->agree_2) && $request->agree_2 == true ? 1 : 0;
         $data->f_name = $request->f_name;
         $data->l_name = $request->l_name;
         $data->email = $request->email;
@@ -327,12 +331,124 @@ class IndexController extends Controller
             'message' => "Server error",
         ]);
     }
+    public function saveSettingProfile(Request $request)
+    {
+        $validator = Validator::make($request->only(
+            'f_name',
+            'l_name',
+            'email',
+            'first_number',
+            'phone_number',
+            'country',
+            'check_ipay',
+            'date_birth',
+            'month_birth',
+            'year_birth',
+            'address',
+            'city',
+            'post_code',
+            'account_type',
+            'account_currency',
+            'is_us',
+            'is_pep',
+            'password',
+            're_password'
+        ), [
+                'f_name' => 'required',
+                'l_name' => 'required',
+                'email' => 'required|email|unique:trading_account,email',
+                'first_number' => 'required',
+                'phone_number' => 'required',
+                'country' => 'required',
+//                'check_ipay' => 'required',
+                'date_birth' => 'required|numeric|min:1|max:31',
+                'month_birth' => 'required|numeric|min:1|max:12',
+                'year_birth' => 'required|numeric',
+                'address' => 'required',
+                'city' => 'required',
+                'post_code' => 'required',
+                'account_type' => 'required',
+                'account_currency' => 'required',
+                'is_us' => 'required',
+                'is_pep' => 'required',
+//                'password' => 'required',
+//                're_password' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message_error' => $validator->errors(),
+                'message' => 'Server error',
+            ]);
+        }
+
+        if (!empty($request->password)) {
+            if ($request->password != $request->re_password) {
+                return response()->json([
+                    'status' => false,
+                    'message' => "Re password invalid",
+                ]);
+            }
+        }
+        $check_email = TradingAccount::where('email', $request->email)->where('trading_account_id', '!=', 1)->first();
+
+        if (!empty($check_email)) {
+            return response()->json([
+                'status' => false,
+                'message' => "The email has already been taken.",
+            ]);
+        }
+        $data = TradingAccount::where('trading_account_id', '=', 1)->first();
+
+        if (empty($data)) {
+            return response()->json([
+                'status' => false,
+                'message' => "Error.",
+            ]);
+        }
+
+        $data->check_ipay = !empty($request->check_ipay) && $request->check_ipay == true ? 1 : 0;
+        $data->is_us = !empty($request->is_us) && $request->is_us == true ? 1 : 0;
+        $data->is_pep = !empty($request->is_pep) && $request->is_pep == true ? 1 : 0;
+        $data->is_read_policy = !empty($request->agree_1) && $request->agree_1 == true ? 1 : 0;
+        $data->is_access_noti = !empty($request->agree_2) && $request->agree_2 == true ? 1 : 0;
+        $data->f_name = $request->f_name;
+        $data->l_name = $request->l_name;
+        $data->email = $request->email;
+        $data->first_number = $request->first_number;
+        $data->phone_number = $request->phone_number;
+        $data->country = $request->country;
+        $data->date_birth = $request->date_birth;
+        $data->month_birth = $request->month_birth;
+        $data->year_birth = $request->year_birth;
+        $data->address = $request->address;
+        $data->city = $request->city;
+        $data->post_code = $request->post_code;
+        $data->account_type = $request->account_type;
+        $data->account_currency = $request->account_currency;
+        $data->account_currency = $request->account_currency;
+
+        if (!empty($request->password)) {
+            $data->password = Hash::make($request->password.$request->email);
+        }
+
+        if ($data->save()) {
+            return response()->json([
+                'status' => true,
+                'message' => "Update success",
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => "Server error",
+        ]);
+    }
 
     public function myProfile()
     {
-        if(!Auth::guard('member')->check()){
-            return redirect('/');
-        }
+//        if(!Auth::guard('member')->check()){
+//            return redirect('/');
+//        }
         $user = Auth::guard('member')->user();
         if (app()->getLocale() == 'en') {
             $brand =  Pages::find(1);
@@ -347,17 +463,21 @@ class IndexController extends Controller
         }
 
         $this->createSeo();
+        $route_name = \Request::route()->getName();
 
-//        $get_info =
+        $get_info = TradingAccount::where('trading_account_id', 1)->first();
 
-        return view('frontend.pages.my_profile', compact( 'data','brand' ));
+        if (!empty($get_info)) {
+            return view('frontend.pages.my_profile', compact( 'data','brand','route_name','get_info'));
+        }
+        return redirect('/');
     }
 
     public function verify()
     {
-        if(Auth::guard('member')->check()){
-            return redirect('/');
-        }
+//        if(Auth::guard('member')->check()){
+//            return redirect('/');
+//        }
         $user = Auth::guard('member')->user();
         if (app()->getLocale() == 'en') {
             $brand =  Pages::find(1);
@@ -370,16 +490,23 @@ class IndexController extends Controller
         }else{
             $data =  Pages::find(3);
         }
+        $route_name = \Request::route()->getName();
 
         $this->createSeo();
-        return view('frontend.pages.verify', compact( 'data','brand' ));
+
+        $get_info = TradingAccount::where('trading_account_id', 1)->first();
+
+        if (!empty($get_info)) {
+            return view('frontend.pages.verify', compact( 'data','brand','route_name','get_info'));
+        }
+        return redirect('/');
     }
 
     public function settingProfile()
     {
-        if(Auth::guard('member')->check()){
-            return redirect('/');
-        }
+//        if(Auth::guard('member')->check()){
+//            return redirect('/');
+//        }
         $user = Auth::guard('member')->user();
         if (app()->getLocale() == 'en') {
             $brand =  Pages::find(1);
@@ -392,9 +519,16 @@ class IndexController extends Controller
         }else{
             $data =  Pages::find(3);
         }
+        $route_name = \Request::route()->getName();
 
         $this->createSeo();
-        return view('frontend.pages.setting-profile', compact( 'data','brand' ));
+
+        $get_info = TradingAccount::where('trading_account_id', 1)->first();
+
+        if (!empty($get_info)) {
+            return view('frontend.pages.setting-profile', compact( 'data','brand','route_name','get_info'));
+        }
+        return redirect('/');
     }
 
 
