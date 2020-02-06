@@ -492,6 +492,7 @@ console.log(data);
                         cache: false,
                         success: function(res){
                             if(res.status) {
+                                alert('Create trading account success.');
                                 window.location.href = '{{ route('home.index') }}';
                             }
                             else {

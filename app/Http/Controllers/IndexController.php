@@ -280,7 +280,7 @@ class IndexController extends Controller
             ]);
         }
 
-        if ($request->password == $request->re_password) {
+        if ($request->password != $request->re_password) {
             return response()->json([
                 'status' => false,
                 'message' => "Re password invalid",
@@ -289,7 +289,7 @@ class IndexController extends Controller
 
         $check_email = TradingAccount::where('email', $request->email)->first();
 
-        if (empty($check_email)) {
+        if (!empty($check_email)) {
             return response()->json([
                 'status' => false,
                 'message' => "The email has already been taken.",
