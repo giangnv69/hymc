@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 06, 2020 lúc 06:09 AM
+-- Thời gian đã tạo: Th2 08, 2020 lúc 09:33 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -67,18 +67,43 @@ CREATE TABLE `members` (
   `password` text COLLATE utf8mb4_unicode_ci,
   `status` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `f_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `l_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `check_ipay` int(255) DEFAULT NULL,
+  `date_birth` int(11) DEFAULT NULL,
+  `month_birth` int(255) DEFAULT NULL,
+  `year_birth` int(255) DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `post_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `account_type` enum('fixed','classic','row') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `account_currency` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_us` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `is_pep` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `is_read_policy` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `is_access_noti` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `verify_driver_license` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `verify_id_card` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `verify_passport` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `img_driver_license` text COLLATE utf8mb4_unicode_ci,
+  `img_id_card_before` text COLLATE utf8mb4_unicode_ci,
+  `img_id_card_after` text COLLATE utf8mb4_unicode_ci,
+  `img_passport` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `members`
 --
 
-INSERT INTO `members` (`id`, `country`, `email`, `remember_token`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Việt Nam', 'nvtrong1210@gmail.com', 'i80gqDpi5MS5NwZD8G01JPdwjK11Yw8gpgADVPZdPuRGT03baMJiLwfhFtLW', '$2y$10$KLxsRGPOWuCSo/xu/pZd5.D6Il779BHv8mk2vf7/h8TTVpne17Rtm', 1, '2020-01-19 08:11:40', '2020-01-19 08:11:40'),
-(2, 'Việt Nam', 'nvtrong111@gmail.com', NULL, '$2y$10$MLpZlO4s5CJMUhco6G2wMeD3uLRAwgmgz6MikXxo8SxQKiKPncS12', 1, '2020-01-19 08:19:37', '2020-01-19 08:19:37'),
-(3, 'vietnam', 'ledinhson209@gmail.com', 'KNhA503ZTZu2F0TpIuRH30tQSykBzeSs6spwzC24h91CzEVuyrHWizUDT7FQ', '$2y$10$QfkeOF2nak0WcByoQ6xcHu4eaU9m7UtLe6Qoo3ZiYpqgNeyYy1gOK', 1, '2020-01-20 09:13:04', '2020-01-20 09:13:04'),
-(4, 'HN', 'gg@gmail.com', 'F2EZBlvdO3ez3FaRCki10nXhNSvhg8Pk3X6h3GNBh6YRoidw0PD6tK6iOCa8', '$2y$10$ntzCGtUIa64WxnXNCaoBqe9qCNdoWri4IYyraGW3xXbJx2ps7dbAm', 1, '2020-01-31 02:14:55', '2020-01-31 02:14:55');
+INSERT INTO `members` (`id`, `country`, `email`, `remember_token`, `password`, `status`, `created_at`, `updated_at`, `f_name`, `l_name`, `first_number`, `phone_number`, `check_ipay`, `date_birth`, `month_birth`, `year_birth`, `address`, `city`, `post_code`, `account_type`, `account_currency`, `is_us`, `is_pep`, `is_read_policy`, `is_access_noti`, `deleted_at`, `verify_driver_license`, `verify_id_card`, `verify_passport`, `img_driver_license`, `img_id_card_before`, `img_id_card_after`, `img_passport`) VALUES
+(1, 'Việt Nam', 'nvtrong1210@gmail.com', 'i80gqDpi5MS5NwZD8G01JPdwjK11Yw8gpgADVPZdPuRGT03baMJiLwfhFtLW', '$2y$10$KLxsRGPOWuCSo/xu/pZd5.D6Il779BHv8mk2vf7/h8TTVpne17Rtm', 1, '2020-01-19 08:11:40', '2020-01-19 08:11:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', NULL, NULL, NULL, NULL),
+(2, 'Việt Nam', 'nvtrong111@gmail.com', NULL, '$2y$10$MLpZlO4s5CJMUhco6G2wMeD3uLRAwgmgz6MikXxo8SxQKiKPncS12', 1, '2020-01-19 08:19:37', '2020-01-19 08:19:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', NULL, NULL, NULL, NULL),
+(3, 'vietnam', 'ledinhson209@gmail.com', 'KNhA503ZTZu2F0TpIuRH30tQSykBzeSs6spwzC24h91CzEVuyrHWizUDT7FQ', '$2y$10$QfkeOF2nak0WcByoQ6xcHu4eaU9m7UtLe6Qoo3ZiYpqgNeyYy1gOK', 1, '2020-01-20 09:13:04', '2020-01-20 09:13:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', NULL, NULL, NULL, NULL),
+(7, 'England', 'aa@gmail.com111', '13MHHGCRXuj4PoFQ30BZTuVW8URsLoso65d2oLdSLqxgFzu9YnXM4YYef2t4', '$2y$10$qwZvBTtjZI3cT28SuJ6KTOTKbqTlnUZp7qwyp7c5e/m53m/ELoQnC', 1, '2020-02-08 17:39:56', '2020-02-08 20:31:06', 'gg11', 'nv11', '+07', '1231231111', 1, 12, 12, 2000, 'gg11', 'xx11', 'xx11', NULL, 'USD', '1', '1', '1', '0', NULL, '0', '0', '0', '1581193866_68988757_495321001302851_5184345484155682816_n.jpg', '1581192221_65736106_853841314986739_6564934817052360704_n.jpg', '1581192221_64329873_2510712839186836_7978281762436415488_o.jpg', '1581192221_71184541_2674699806121471_2950914326472425472_o.jpg');
 
 -- --------------------------------------------------------
 
@@ -258,22 +283,27 @@ CREATE TABLE `trading_account` (
   `post_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `account_type` enum('fixed','classic','row') COLLATE utf8_unicode_ci DEFAULT NULL,
   `account_currency` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `is_us` tinyint(4) DEFAULT NULL,
-  `is_pep` tinyint(4) DEFAULT NULL,
+  `is_us` enum('0','1') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_pep` enum('0','1') COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` text COLLATE utf8_unicode_ci NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `deleted_at` datetime DEFAULT NULL
+  `deleted_at` datetime DEFAULT NULL,
+  `is_read_policy` enum('0','1') COLLATE utf8_unicode_ci DEFAULT '0',
+  `is_access_noti` enum('0','1') COLLATE utf8_unicode_ci DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `trading_account`
 --
 
-INSERT INTO `trading_account` (`trading_account_id`, `user_id`, `f_name`, `l_name`, `email`, `first_number`, `phone_number`, `country`, `check_ipay`, `date_birth`, `month_birth`, `year_birth`, `address`, `city`, `post_code`, `account_type`, `account_currency`, `is_us`, `is_pep`, `password`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, NULL, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', 1, 1, '123321', '2020-02-02 13:14:24', '2020-02-02 13:14:24', NULL),
-(2, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, NULL, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', 1, 1, '123321', '2020-02-02 13:15:27', '2020-02-02 13:15:27', NULL),
-(3, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, 1989, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', 1, 1, '123321', '2020-02-02 13:16:13', '2020-02-02 13:16:13', NULL);
+INSERT INTO `trading_account` (`trading_account_id`, `user_id`, `f_name`, `l_name`, `email`, `first_number`, `phone_number`, `country`, `check_ipay`, `date_birth`, `month_birth`, `year_birth`, `address`, `city`, `post_code`, `account_type`, `account_currency`, `is_us`, `is_pep`, `password`, `created_at`, `updated_at`, `deleted_at`, `is_read_policy`, `is_access_noti`) VALUES
+(1, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, NULL, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', '1', '1', '123321', '2020-02-02 13:14:24', '2020-02-02 13:14:24', NULL, NULL, NULL),
+(2, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, NULL, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', '1', '1', '123321', '2020-02-02 13:15:27', '2020-02-02 13:15:27', NULL, NULL, NULL),
+(3, NULL, '123321', '123321', 'gg@gmail.com', '+84', '123321', 'Vietnam', 1, 27, 12, 1989, 'G3 Vinhome GreenBay Me Tri Nam Tu Liem', 'Ha Noi', '100000', 'classic', 'USD', '1', '1', '123321', '2020-02-02 13:16:13', '2020-02-02 13:16:13', NULL, NULL, NULL),
+(4, NULL, 'gggg', 'ggggg', 'aa@gmail.com', '+84', '1231231', 'Vietnam', 0, 1, 1, 12321, '1', '1', '1', 'classic', 'USD', '0', '0', '$2y$10$C/awjBpCulH3GrIYwiotwuCAtx4drqQquJZUvJMQSFcRmvneSPa/i', '2020-02-07 01:42:39', '2020-02-07 01:42:39', NULL, NULL, NULL),
+(5, NULL, 'gggg', 'ggggg', 'aaa@gmail.com', '+84', '1231231', 'Vietnam', 0, 1, 1, 12321, '1', '1', '1', 'classic', 'USD', '0', '0', '$2y$10$.lItA2Ay7e6NQymDoYpjFuAAlAdD69zS5luY46huCdfUUoQ3/PsHS', '2020-02-07 01:44:26', '2020-02-07 01:44:26', NULL, '0', '0'),
+(6, NULL, 'gggg', 'ggggg', 'aaaa@gmail.com', '+84', '1231231', 'Vietnam', 0, 1, 1, 12321, '1', '1', '1', 'classic', 'USD', '0', '0', '$2y$10$8/RUt3L8wlE3ii4HvL11uOeGP3npRkv3AeqX6L8WuVNB16lr72iMe', '2020-02-07 01:46:06', '2020-02-07 01:46:06', NULL, '0', '0');
 
 -- --------------------------------------------------------
 
@@ -385,7 +415,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT cho bảng `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `menu`
@@ -421,7 +451,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT cho bảng `trading_account`
 --
 ALTER TABLE `trading_account`
-  MODIFY `trading_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `trading_account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

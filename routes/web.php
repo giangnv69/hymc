@@ -31,10 +31,12 @@ Route::group(['middleware' => 'locale'], function() {
     Route::get('about', ['as'=>'home.about', 'uses'=>'IndexController@getAbout']);
     Route::get('my-profile', ['as'=>'home.my-profile', 'uses'=>'IndexController@myProfile']);
     Route::get('my-profile/settings', ['as'=>'home.my-profile.settings', 'uses'=>'IndexController@settingProfile']);
-    Route::get('my-profile/save-settings', ['as'=>'home.my-profile.save-settings', 'uses'=>'IndexController@saveSettingProfile']);
+    Route::post('my-profile/save-settings', ['as'=>'home.my-profile.save-settings', 'uses'=>'IndexController@saveSettingProfile']);
+    Route::post('my-profile/upload-img-verify', ['as'=>'home.my-profile.upload-img-verify', 'uses'=>'IndexController@uploadImgVerify']);
     Route::get('verify', ['as'=>'home.verify', 'uses'=>'IndexController@verify']);
-
-
+    Route::get('verify/driver-license', ['as'=>'home.verify.driver-license', 'uses'=>'IndexController@verifyDriver']);
+    Route::get('verify/id-card', ['as'=>'home.verify.id-card', 'uses'=>'IndexController@verifyIDCard']);
+    Route::get('verify/passport', ['as'=>'home.verify.passport', 'uses'=>'IndexController@verifyPassport']);
 });
 
 Route::group(['namespace' => 'Admin'], function () {

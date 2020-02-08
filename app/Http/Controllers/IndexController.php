@@ -44,7 +44,7 @@ class IndexController extends Controller
 
         $social = json_decode($social->content);
 
-        
+
         OpenGraph::setUrl(\URL::current());
 
         OpenGraph::addProperty('locale', 'vi');
@@ -74,7 +74,7 @@ class IndexController extends Controller
         session(['lang' => $lang]);
         return back();
     }
-   
+
 
     public function createSeo($dataSeo = null)
     {
@@ -101,13 +101,35 @@ class IndexController extends Controller
         }
     }
 
+//    public function getSignUp()
+//    {
+//        if(Auth::guard('member')->check()){
+//            return redirect('/');
+//        }
+//        $this->createSeo();
+//        return view('frontend.pages.user.sign-up');
+//    }
     public function getSignUp()
     {
         if(Auth::guard('member')->check()){
             return redirect('/');
         }
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+
+        $route_name = \Request::route()->getName();
         $this->createSeo();
-        return view('frontend.pages.user.sign-up');
+        return view('frontend.pages.open_trading', compact( 'data','brand', 'route_name' ));
+
     }
 
     public function postSingUp(Request $request)
@@ -247,25 +269,25 @@ class IndexController extends Controller
             'password',
             're_password'
         ), [
-                'f_name' => 'required',
-                'l_name' => 'required',
-                'email' => 'required|email|unique:trading_account,email',
-                'first_number' => 'required',
-                'phone_number' => 'required',
-                'country' => 'required',
+            'f_name' => 'required',
+            'l_name' => 'required',
+            'email' => 'required|email|unique:members,email',
+            'first_number' => 'required',
+            'phone_number' => 'required',
+            'country' => 'required',
 //                'check_ipay' => 'required',
-                'date_birth' => 'required|numeric|min:1|max:31',
-                'month_birth' => 'required|numeric|min:1|max:12',
-                'year_birth' => 'required|numeric',
-                'address' => 'required',
-                'city' => 'required',
-                'post_code' => 'required',
-                'account_type' => 'required',
-                'account_currency' => 'required',
-                'is_us' => 'required',
-                'is_pep' => 'required',
-                'password' => 'required',
-                're_password' => 'required'
+            'date_birth' => 'required|numeric|min:1|max:31',
+            'month_birth' => 'required|numeric|min:1|max:12',
+            'year_birth' => 'required|numeric',
+            'address' => 'required',
+            'city' => 'required',
+            'post_code' => 'required',
+            'account_type' => 'required',
+            'account_currency' => 'required',
+            'is_us' => 'required',
+            'is_pep' => 'required',
+            'password' => 'required|min:6',
+            're_password' => 'required|min:6'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -289,7 +311,7 @@ class IndexController extends Controller
             ]);
         }
 
-        $check_email = TradingAccount::where('email', $request->email)->first();
+        $check_email = Members::where('email', $request->email)->first();
 
         if (!empty($check_email)) {
             return response()->json([
@@ -297,12 +319,13 @@ class IndexController extends Controller
                 'message' => "The email has already been taken.",
             ]);
         }
-        $data = new TradingAccount();
+
+        $data = new Members();
         $data->check_ipay = !empty($request->check_ipay) && $request->check_ipay == true ? 1 : 0;
         $data->is_us = !empty($request->is_us) && $request->is_us == true ? 1 : 0;
         $data->is_pep = !empty($request->is_pep) && $request->is_pep == true ? 1 : 0;
-        $data->is_read_policy = !empty($request->agree_1) && $request->agree_1 == true ? 1 : 0;
-        $data->is_access_noti = !empty($request->agree_2) && $request->agree_2 == true ? 1 : 0;
+        $data->is_read_policy = !empty($request->is_read_policy) && $request->is_read_policy == true ? 1 : 0;
+        $data->is_access_noti = !empty($request->is_access_noti) && $request->is_access_noti == true ? 1 : 0;
         $data->f_name = $request->f_name;
         $data->l_name = $request->l_name;
         $data->email = $request->email;
@@ -317,10 +340,17 @@ class IndexController extends Controller
         $data->post_code = $request->post_code;
         $data->account_type = $request->account_type;
         $data->account_currency = $request->account_currency;
-        $data->account_currency = $request->account_currency;
-        $data->password = Hash::make($request->password.$request->email);
+        $data->password = Hash::make($request->password);
+        $data->status = 1;
 
         if ($data->save()) {
+            $data_sigin = [
+                'email'    => $request->email,
+                'password' => $request->password,
+            ];
+
+            Auth::guard('member')->attempt($data_sigin, false);
+
             return response()->json([
                 'status' => true,
                 'message' => "Success",
@@ -347,30 +377,30 @@ class IndexController extends Controller
             'address',
             'city',
             'post_code',
-            'account_type',
-            'account_currency',
+//            'account_type',
+//            'account_currency',
             'is_us',
             'is_pep',
-            'password',
-            're_password'
+//            'password',
+//            're_password'
         ), [
-                'f_name' => 'required',
-                'l_name' => 'required',
-                'email' => 'required|email|unique:trading_account,email',
-                'first_number' => 'required',
-                'phone_number' => 'required',
-                'country' => 'required',
+            'f_name' => 'required',
+            'l_name' => 'required',
+            'email' => 'required|email|unique:trading_account,email',
+            'first_number' => 'required',
+            'phone_number' => 'required',
+            'country' => 'required',
 //                'check_ipay' => 'required',
-                'date_birth' => 'required|numeric|min:1|max:31',
-                'month_birth' => 'required|numeric|min:1|max:12',
-                'year_birth' => 'required|numeric',
-                'address' => 'required',
-                'city' => 'required',
-                'post_code' => 'required',
-                'account_type' => 'required',
-                'account_currency' => 'required',
-                'is_us' => 'required',
-                'is_pep' => 'required',
+            'date_birth' => 'required|numeric|min:1|max:31',
+            'month_birth' => 'required|numeric|min:1|max:12',
+            'year_birth' => 'required|numeric',
+            'address' => 'required',
+            'city' => 'required',
+            'post_code' => 'required',
+//            'account_type' => 'required',
+//            'account_currency' => 'required',
+            'is_us' => 'required',
+            'is_pep' => 'required',
 //                'password' => 'required',
 //                're_password' => 'required'
         ]);
@@ -390,7 +420,7 @@ class IndexController extends Controller
                 ]);
             }
         }
-        $check_email = TradingAccount::where('email', $request->email)->where('trading_account_id', '!=', 1)->first();
+        $check_email = Members::where('email', $request->email)->first();
 
         if (!empty($check_email)) {
             return response()->json([
@@ -398,7 +428,8 @@ class IndexController extends Controller
                 'message' => "The email has already been taken.",
             ]);
         }
-        $data = TradingAccount::where('trading_account_id', '=', 1)->first();
+        $user = Auth::guard('member')->user();
+        $data = Members::where('id', '=', $user->id)->first();
 
         if (empty($data)) {
             return response()->json([
@@ -410,8 +441,8 @@ class IndexController extends Controller
         $data->check_ipay = !empty($request->check_ipay) && $request->check_ipay == true ? 1 : 0;
         $data->is_us = !empty($request->is_us) && $request->is_us == true ? 1 : 0;
         $data->is_pep = !empty($request->is_pep) && $request->is_pep == true ? 1 : 0;
-        $data->is_read_policy = !empty($request->agree_1) && $request->agree_1 == true ? 1 : 0;
-        $data->is_access_noti = !empty($request->agree_2) && $request->agree_2 == true ? 1 : 0;
+        $data->is_read_policy = !empty($request->is_read_policy) && $request->is_read_policy == true ? 1 : 0;
+        $data->is_access_noti = !empty($request->is_access_noti) && $request->is_access_noti == true ? 1 : 0;
         $data->f_name = $request->f_name;
         $data->l_name = $request->l_name;
         $data->email = $request->email;
@@ -425,11 +456,122 @@ class IndexController extends Controller
         $data->city = $request->city;
         $data->post_code = $request->post_code;
         $data->account_type = $request->account_type;
-        $data->account_currency = $request->account_currency;
-        $data->account_currency = $request->account_currency;
+//        $data->account_currency = $request->account_currency;
 
         if (!empty($request->password)) {
-            $data->password = Hash::make($request->password.$request->email);
+            $data->password = Hash::make($request->password);
+        }
+
+        if ($data->save()) {
+            return response()->json([
+                'status' => true,
+                'message' => "Update success",
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => "Server error",
+        ]);
+    }
+    public function uploadImgVerify(Request $request)
+    {
+        if (!empty($request->img_driver_license)) {
+            $validator = Validator::make($request->only(
+                'img_driver_license'
+            ), [
+                'img_driver_license' => 'mimes:jpeg,jpg,png,gif|required|max:2000'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message_error' => $validator->errors(),
+                    'message' => 'Image driver license invalid',
+                ]);
+            }
+        }
+        if (!empty($request->img_id_card_before)) {
+            $validator = Validator::make($request->only(
+                'img_id_card_before'
+            ), [
+                'img_id_card_before' => 'mimes:jpeg,jpg,png,gif|required|max:2000'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message_error' => $validator->errors(),
+                    'message' => 'Image ID card before invalid',
+                ]);
+            }
+        }
+        if (!empty($request->img_id_card_after)) {
+            $validator = Validator::make($request->only(
+                'img_id_card_after'
+            ), [
+                'img_id_card_after' => 'mimes:jpeg,jpg,png,gif|required|max:2000'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message_error' => $validator->errors(),
+                    'message' => 'Image ID card after invalid',
+                ]);
+            }
+        }
+        if (!empty($request->img_passport)) {
+            $validator = Validator::make($request->only(
+                'img_passport'
+            ), [
+                'img_passport' => 'mimes:jpeg,jpg,png,gif|required|max:2000'
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message_error' => $validator->errors(),
+                    'message' => 'Image passport invalid',
+                ]);
+            }
+        }
+        $user = Auth::guard('member')->user();
+        $data = Members::where('id', '=', $user->id)->first();
+
+        if (empty($data)) {
+            return response()->json([
+                'status' => false,
+                'message' => "Error.",
+            ]);
+        }
+
+        if ($request->hasFile('img_driver_license')) {
+            $image = $request->file('img_driver_license');
+            $name = time().'_'.$image->getClientOriginalName();
+            $destinationPath = public_path('uploads/images11');
+            if ($image->move($destinationPath, $name)) {
+                $data->img_driver_license = $name;
+            }
+        }
+        if ($request->hasFile('img_id_card_before')) {
+            $image = $request->file('img_id_card_before');
+            $name = time().'_'.$image->getClientOriginalName();
+            $destinationPath = public_path('uploads/images');
+            if ($image->move($destinationPath, $name)) {
+                $data->img_id_card_before = $name;
+            }
+        }
+        if ($request->hasFile('img_id_card_after')) {
+            $image = $request->file('img_id_card_after');
+            $name = time().'_'.$image->getClientOriginalName();
+            $destinationPath = public_path('uploads/images');
+            if ($image->move($destinationPath, $name)) {
+                $data->img_id_card_after = $name;
+            }
+        }
+        if ($request->hasFile('img_passport')) {
+            $image = $request->file('img_passport');
+            $name = time().'_'.$image->getClientOriginalName();
+            $destinationPath = public_path('uploads/images');
+            if ($image->move($destinationPath, $name)) {
+                $data->img_passport = $name;
+            }
         }
 
         if ($data->save()) {
@@ -446,9 +588,9 @@ class IndexController extends Controller
 
     public function myProfile()
     {
-//        if(!Auth::guard('member')->check()){
-//            return redirect('/');
-//        }
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
         $user = Auth::guard('member')->user();
         if (app()->getLocale() == 'en') {
             $brand =  Pages::find(1);
@@ -465,7 +607,7 @@ class IndexController extends Controller
         $this->createSeo();
         $route_name = \Request::route()->getName();
 
-        $get_info = TradingAccount::where('trading_account_id', 1)->first();
+        $get_info = Members::where('id', $user->id)->first();
 
         if (!empty($get_info)) {
             return view('frontend.pages.my_profile', compact( 'data','brand','route_name','get_info'));
@@ -475,9 +617,9 @@ class IndexController extends Controller
 
     public function verify()
     {
-//        if(Auth::guard('member')->check()){
-//            return redirect('/');
-//        }
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
         $user = Auth::guard('member')->user();
         if (app()->getLocale() == 'en') {
             $brand =  Pages::find(1);
@@ -494,7 +636,7 @@ class IndexController extends Controller
 
         $this->createSeo();
 
-        $get_info = TradingAccount::where('trading_account_id', 1)->first();
+        $get_info = Members::where('id', $user->id)->first();
 
         if (!empty($get_info)) {
             return view('frontend.pages.verify', compact( 'data','brand','route_name','get_info'));
@@ -502,11 +644,11 @@ class IndexController extends Controller
         return redirect('/');
     }
 
-    public function settingProfile()
+    public function verifyDriver()
     {
-//        if(Auth::guard('member')->check()){
-//            return redirect('/');
-//        }
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
         $user = Auth::guard('member')->user();
         if (app()->getLocale() == 'en') {
             $brand =  Pages::find(1);
@@ -523,8 +665,93 @@ class IndexController extends Controller
 
         $this->createSeo();
 
-        $get_info = TradingAccount::where('trading_account_id', 1)->first();
+        $get_info = Members::where('id', $user->id)->first();
 
+        if (!empty($get_info)) {
+            return view('frontend.pages.verify_driver', compact( 'data','brand','route_name','get_info'));
+        }
+        return redirect('/');
+    }
+
+    public function verifyIDCard()
+    {
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
+        $user = Auth::guard('member')->user();
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+        $route_name = \Request::route()->getName();
+
+        $this->createSeo();
+
+        $get_info = Members::where('id', $user->id)->first();
+
+        if (!empty($get_info)) {
+            return view('frontend.pages.verify_id_card', compact( 'data','brand','route_name','get_info'));
+        }
+        return redirect('/');
+    }
+
+    public function verifyPassport()
+    {
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
+        $user = Auth::guard('member')->user();
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+        $route_name = \Request::route()->getName();
+
+        $this->createSeo();
+
+        $get_info = Members::where('id', $user->id)->first();
+
+        if (!empty($get_info)) {
+            return view('frontend.pages.verify_passport', compact( 'data','brand','route_name','get_info'));
+        }
+        return redirect('/');
+    }
+
+    public function settingProfile()
+    {
+        if(!Auth::guard('member')->check()){
+            return redirect('/');
+        }
+        $user = Auth::guard('member')->user();
+        if (app()->getLocale() == 'en') {
+            $brand =  Pages::find(1);
+        }else{
+            $brand =  Pages::find(2);
+        }
+
+        if (app()->getLocale() == 'en') {
+            $data =  Pages::find(3);
+        }else{
+            $data =  Pages::find(3);
+        }
+        $route_name = \Request::route()->getName();
+
+        $this->createSeo();
+        $get_info = Members::where('id', $user->id)->first();
         if (!empty($get_info)) {
             return view('frontend.pages.setting-profile', compact( 'data','brand','route_name','get_info'));
         }

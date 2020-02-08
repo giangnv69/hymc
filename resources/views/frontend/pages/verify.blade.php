@@ -32,7 +32,7 @@
                                 <div class="list-veryfile">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <a href="step5-2-1.php">
+                                            <a href="{{ route('home.verify.driver-license') }}">
                                                 <div class="item text-center">
                                                     <div class="icon"><img src="{{ __BASE_URL__ }}/images/pt1.png" class="img-fluid" alt=""></div>
                                                     <div class="info">
@@ -42,7 +42,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="step5-2-2.php">
+                                            <a href="{{ route('home.verify.id-card') }}">
                                                 <div class="item text-center">
                                                     <div class="icon"><img src="{{ __BASE_URL__ }}/images/pt2.png" class="img-fluid" alt=""></div>
                                                     <div class="info">
@@ -52,7 +52,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-4">
-                                            <a href="step5-2-3.php">
+                                            <a href="{{ route('home.verify.passport') }}">
                                                 <div class="item text-center">
                                                     <div class="icon"><img src="{{ __BASE_URL__ }}/images/pt3.png" class="img-fluid" alt=""></div>
                                                     <div class="info">

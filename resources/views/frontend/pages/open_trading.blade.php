@@ -444,8 +444,8 @@
             data.is_pep = $('.step_create_account_tradding input[ name = is_pep ]:checked').val();
             data.password = $('.step_create_account_tradding input[ name = password ]').val();
             data.re_password = $('.step_create_account_tradding input[ name = re_password ]').val();
-            data.agree_1 = $('.step_create_account_tradding input[ name = agree_1 ]:checked').val();
-            data.agree_2 = $('.step_create_account_tradding input[ name = agree_2 ]:checked').val();
+            data.is_read_policy = $('.step_create_account_tradding input[ name = is_read_policy ]:checked').val();
+            data.is_access_noti = $('.step_create_account_tradding input[ name = is_access_noti ]:checked').val();
 
             if (step_next == 'tab_2') {
                 if(data.f_name != '' && data.l_name != '' && data.email != '' && data.first_number != '' && data.phone_number != '' ) {
@@ -481,6 +481,11 @@
             }
             if (step_next == 'tab_5') {
                 if(data.is_us != '' && data.is_pep != '' && data.email != '' && data.password != '' && data.re_password != '') {
+
+                    if (data.password.length < 6 && data.re_password.length < 6) {
+                        alert('Password min 6 chars');
+                        return;
+                    }
                     if (data.password != data.re_password) {
                         alert('Password invalid');
                         return;
