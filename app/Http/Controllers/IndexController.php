@@ -380,7 +380,7 @@ class IndexController extends Controller
 //            'account_type',
 //            'account_currency',
             'is_us',
-            'is_pep',
+            'is_pep'
 //            'password',
 //            're_password'
         ), [
