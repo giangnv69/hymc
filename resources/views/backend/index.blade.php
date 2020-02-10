@@ -105,6 +105,12 @@
                     </a>
                 </li>
 
+                <li class="{{ Request::segment(2) == 'verify' ? 'active' : null  }}">
+                    <a href="{{ route('verify.list') }}">
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i> <span>Xác minh thông tin</span>
+                    </a>
+                </li>
+
                 <li class="treeview {{ Request::segment(2) === 'setting' || Request::segment(2) === 'slider' || Request::segment(2) === 'menu' || Request::segment(2) === 'widget' ? 'active' : null }}">
                     <a href="#">
                         <i class="fa fa-cog" aria-hidden="true"></i> <span>Cấu hình</span>

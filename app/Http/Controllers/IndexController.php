@@ -489,7 +489,7 @@ class IndexController extends Controller
                 ]);
             }
         }
-        if (!empty($request->img_id_card_before)) {
+        if (!empty($request->img_id_card_before) && !empty($request->img_id_card_after)) {
             $validator = Validator::make($request->only(
                 'img_id_card_before'
             ), [
@@ -502,8 +502,7 @@ class IndexController extends Controller
                     'message' => 'Image ID card before invalid',
                 ]);
             }
-        }
-        if (!empty($request->img_id_card_after)) {
+
             $validator = Validator::make($request->only(
                 'img_id_card_after'
             ), [
@@ -541,35 +540,32 @@ class IndexController extends Controller
             ]);
         }
 
+        $path = 'uploads/verify/';
+
         if ($request->hasFile('img_driver_license')) {
             $image = $request->file('img_driver_license');
             $name = time().'_'.$image->getClientOriginalName();
-            $destinationPath = public_path('uploads/images11');
-            if ($image->move($destinationPath, $name)) {
+            if ($image->move($path, $name)) {
                 $data->img_driver_license = $name;
             }
         }
-        if ($request->hasFile('img_id_card_before')) {
+        if ($request->hasFile('img_id_card_before') && $request->hasFile('img_id_card_after')) {
             $image = $request->file('img_id_card_before');
             $name = time().'_'.$image->getClientOriginalName();
-            $destinationPath = public_path('uploads/images');
-            if ($image->move($destinationPath, $name)) {
+            if ($image->move($path, $name)) {
                 $data->img_id_card_before = $name;
             }
-        }
-        if ($request->hasFile('img_id_card_after')) {
+
             $image = $request->file('img_id_card_after');
             $name = time().'_'.$image->getClientOriginalName();
-            $destinationPath = public_path('uploads/images');
-            if ($image->move($destinationPath, $name)) {
+            if ($image->move($path, $name)) {
                 $data->img_id_card_after = $name;
             }
         }
         if ($request->hasFile('img_passport')) {
             $image = $request->file('img_passport');
             $name = time().'_'.$image->getClientOriginalName();
-            $destinationPath = public_path('uploads/images');
-            if ($image->move($destinationPath, $name)) {
+            if ($image->move($path, $name)) {
                 $data->img_passport = $name;
             }
         }

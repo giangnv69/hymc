@@ -85,6 +85,12 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::post('/create', ['as' => 'pages.create', 'uses' => 'PagesController@postCreatePages']); 
         });
 
+        Route::group(['prefix' => 'verify'], function () {
+            Route::get('/', ['as' => 'verify.list', 'uses' => 'VerifyController@verify']);
+            Route::get('/verified', ['as' => 'verify.verified', 'uses' => 'VerifyController@verified']);
+            Route::get('/verified-img', ['as' => 'verify.verifiedimg', 'uses' => 'VerifyController@verifiedImg']);
+        });
+
         Route::group(['prefix' => 'widget'], function () {
             Route::get('/', ['as' => 'widget.get', 'uses' => 'SettingController@getWidget']);
             Route::post('/', ['as' => 'widget.get.post', 'uses' => 'SettingController@postWidget']); 
