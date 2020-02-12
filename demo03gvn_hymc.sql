@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 08, 2020 lúc 09:33 PM
+-- Thời gian đã tạo: Th2 12, 2020 lúc 03:25 AM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -72,23 +72,23 @@ CREATE TABLE `members` (
   `l_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `first_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `check_ipay` int(255) DEFAULT NULL,
+  `check_ipay` int(11) DEFAULT '0',
   `date_birth` int(11) DEFAULT NULL,
-  `month_birth` int(255) DEFAULT NULL,
-  `year_birth` int(255) DEFAULT NULL,
+  `month_birth` int(11) DEFAULT NULL,
+  `year_birth` int(11) DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `post_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `account_type` enum('fixed','classic','row') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `account_currency` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_us` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
-  `is_pep` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
-  `is_read_policy` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
-  `is_access_noti` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_us` int(11) DEFAULT '0',
+  `is_pep` int(11) DEFAULT '0',
+  `is_read_policy` int(11) DEFAULT '0',
+  `is_access_noti` int(11) DEFAULT '0',
   `deleted_at` datetime DEFAULT NULL,
-  `verify_driver_license` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
-  `verify_id_card` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
-  `verify_passport` enum('0','1') COLLATE utf8mb4_unicode_ci DEFAULT '0',
+  `verify_driver_license` int(11) DEFAULT '0',
+  `verify_id_card` int(11) DEFAULT '0',
+  `verify_passport` int(11) DEFAULT '0',
   `img_driver_license` text COLLATE utf8mb4_unicode_ci,
   `img_id_card_before` text COLLATE utf8mb4_unicode_ci,
   `img_id_card_after` text COLLATE utf8mb4_unicode_ci,
@@ -100,10 +100,10 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `country`, `email`, `remember_token`, `password`, `status`, `created_at`, `updated_at`, `f_name`, `l_name`, `first_number`, `phone_number`, `check_ipay`, `date_birth`, `month_birth`, `year_birth`, `address`, `city`, `post_code`, `account_type`, `account_currency`, `is_us`, `is_pep`, `is_read_policy`, `is_access_noti`, `deleted_at`, `verify_driver_license`, `verify_id_card`, `verify_passport`, `img_driver_license`, `img_id_card_before`, `img_id_card_after`, `img_passport`) VALUES
-(1, 'Việt Nam', 'nvtrong1210@gmail.com', 'i80gqDpi5MS5NwZD8G01JPdwjK11Yw8gpgADVPZdPuRGT03baMJiLwfhFtLW', '$2y$10$KLxsRGPOWuCSo/xu/pZd5.D6Il779BHv8mk2vf7/h8TTVpne17Rtm', 1, '2020-01-19 08:11:40', '2020-01-19 08:11:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', NULL, NULL, NULL, NULL),
-(2, 'Việt Nam', 'nvtrong111@gmail.com', NULL, '$2y$10$MLpZlO4s5CJMUhco6G2wMeD3uLRAwgmgz6MikXxo8SxQKiKPncS12', 1, '2020-01-19 08:19:37', '2020-01-19 08:19:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', NULL, NULL, NULL, NULL),
-(3, 'vietnam', 'ledinhson209@gmail.com', 'KNhA503ZTZu2F0TpIuRH30tQSykBzeSs6spwzC24h91CzEVuyrHWizUDT7FQ', '$2y$10$QfkeOF2nak0WcByoQ6xcHu4eaU9m7UtLe6Qoo3ZiYpqgNeyYy1gOK', 1, '2020-01-20 09:13:04', '2020-01-20 09:13:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', NULL, NULL, NULL, NULL),
-(7, 'England', 'aa@gmail.com111', '13MHHGCRXuj4PoFQ30BZTuVW8URsLoso65d2oLdSLqxgFzu9YnXM4YYef2t4', '$2y$10$qwZvBTtjZI3cT28SuJ6KTOTKbqTlnUZp7qwyp7c5e/m53m/ELoQnC', 1, '2020-02-08 17:39:56', '2020-02-08 20:31:06', 'gg11', 'nv11', '+07', '1231231111', 1, 12, 12, 2000, 'gg11', 'xx11', 'xx11', NULL, 'USD', '1', '1', '1', '0', NULL, '0', '0', '0', '1581193866_68988757_495321001302851_5184345484155682816_n.jpg', '1581192221_65736106_853841314986739_6564934817052360704_n.jpg', '1581192221_64329873_2510712839186836_7978281762436415488_o.jpg', '1581192221_71184541_2674699806121471_2950914326472425472_o.jpg');
+(1, 'Việt Nam', 'nvtrong1210@gmail.com', 'i80gqDpi5MS5NwZD8G01JPdwjK11Yw8gpgADVPZdPuRGT03baMJiLwfhFtLW', '$2y$10$KLxsRGPOWuCSo/xu/pZd5.D6Il779BHv8mk2vf7/h8TTVpne17Rtm', 1, '2020-01-19 08:11:40', '2020-01-19 08:11:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL),
+(2, 'Việt Nam', 'nvtrong111@gmail.com', NULL, '$2y$10$MLpZlO4s5CJMUhco6G2wMeD3uLRAwgmgz6MikXxo8SxQKiKPncS12', 1, '2020-01-19 08:19:37', '2020-01-19 08:19:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL),
+(3, 'vietnam', 'ledinhson209@gmail.com', 'KNhA503ZTZu2F0TpIuRH30tQSykBzeSs6spwzC24h91CzEVuyrHWizUDT7FQ', '$2y$10$QfkeOF2nak0WcByoQ6xcHu4eaU9m7UtLe6Qoo3ZiYpqgNeyYy1gOK', 1, '2020-01-20 09:13:04', '2020-01-20 09:13:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, NULL, NULL, NULL, NULL),
+(7, 'England', 'aa@gmail.com111', '13MHHGCRXuj4PoFQ30BZTuVW8URsLoso65d2oLdSLqxgFzu9YnXM4YYef2t4', '$2y$10$qwZvBTtjZI3cT28SuJ6KTOTKbqTlnUZp7qwyp7c5e/m53m/ELoQnC', 1, '2020-02-08 17:39:56', '2020-02-10 16:56:33', 'gg11', 'nv11', '+07', '1231231111', 1, 12, 12, 2000, 'gg11', 'xx11', 'xx11', NULL, 'USD', 2, 2, 2, 1, NULL, 1, 1, 0, '1581351510_60536843_2335991126725109_105918278680969216_n.jpg', '1581351510_60536843_2335991126725109_105918278680969216_n.jpg', '1581351510_66270113_609192556237385_5905663801042141184_n.jpg', '1581351510_68988757_495321001302851_5184345484155682816_n.jpg');
 
 -- --------------------------------------------------------
 
