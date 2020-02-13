@@ -127,45 +127,56 @@ else
             </div>
         </div>
     </div>
-    <div class="header-menu">
-        <div class="container">
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="left">
-                            <ul>
-                                @if (!empty($menu_header))
-                                    @foreach ($menu_header as $item)
-                                        <li>
-                                            <a href="{{ $item->url }}" class="{{ $item->url == url()->current() ? 'active' : null }}">{{ $item->{ 'title_'.app()->getLocale() } }}</a>
-                                        </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-5">
-                        <div class="right btn-acc">
-                            <ul class="list-inline text-right">
-                                @if (!Auth::guard('member')->check())
-                                    <li class="list-inline-item"><a href="{{ route('home.sign-up') }}" class="account">{{ trans('trans.open_ccount') }}</a></li>
-                                    <li class="list-inline-item"><a href="{{ route('home.log-in') }}" class="login">{{ trans('trans.login') }}</a></li>
-                                @else
-                                    <li class="list-inline-item">
-                                        <a href="#" class="account">{{ Auth::guard('member')->user()->email }}</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="{{ route('home.log-out') }}" class="login">{{ trans('trans.login-out') }}</a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{{--      <nav id="menu">--}}
+     <?php
+     if (!empty($route_name) && ($route_name == 'home.openTrading')) {
+     ?>
+     <?php
+     }
+     else{
+     ?>
+     <div class="header-menu">
+         <div class="container">
+             <div class="content">
+                 <div class="row">
+                     <div class="col-md-7">
+                         <div class="left">
+                             <ul>
+                                 @if (!empty($menu_header))
+                                     @foreach ($menu_header as $item)
+                                         <li>
+                                             <a href="{{ $item->url }}" class="{{ $item->url == url()->current() ? 'active' : null }}">{{ $item->{ 'title_'.app()->getLocale() } }}</a>
+                                         </li>
+                                     @endforeach
+                                 @endif
+                             </ul>
+                         </div>
+                     </div>
+                     <div class="col-md-5">
+                         <div class="right btn-acc">
+                             <ul class="list-inline text-right">
+                                 @if (!Auth::guard('member')->check())
+                                     <li class="list-inline-item"><a href="{{ route('home.sign-up') }}" class="account">{{ trans('trans.open_ccount') }}</a></li>
+                                     <li class="list-inline-item"><a href="{{ route('home.log-in') }}" class="login">{{ trans('trans.login') }}</a></li>
+                                 @else
+                                     <li class="list-inline-item">
+                                         <a href="{{ route('home.my-profile') }}" class="account">{{ Auth::guard('member')->user()->f_name. ' '.Auth::guard('member')->user()->l_name }}</a>
+                                     </li>
+                                     <li class="list-inline-item">
+                                         <a href="{{ route('home.log-out') }}" class="login">{{ trans('trans.login-out') }}</a>
+                                     </li>
+                                 @endif
+                             </ul>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <?php
+     }
+     ?>
+
+     {{--      <nav id="menu">--}}
 {{--        <ul>--}}
 {{--            @if (!empty($menu_header))--}}
 {{--                @foreach ($menu_header as $item)--}}
